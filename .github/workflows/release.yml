@@ -48,16 +48,30 @@ jobs:
       - name: Create checksum
         shell: pwsh
         run: |
-          $exe = Join-Path $PWD "release\rabbit inside.exe"
+          $source = Join-Path $PWD "release\rabbit inside.exe"
+          $exe = Join-Path $PWD "release\rabbit-inside.exe"
+          Copy-Item $source $exe
           $hash = (Get-FileHash -Algorithm SHA256 $exe).Hash.ToLowerInvariant()
-          "$hash  rabbit inside.exe" | Set-Content "release\SHA256SUMS.txt" -Encoding ascii
+          "$hash  rabbit-inside.exe" | Set-Content "release\SHA256SUMS.txt" -Encoding ascii
 
       - name: Publish GitHub release
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create $env:GITHUB_REF_NAME `
-            --generate-notes `
-            "release/rabbit inside.exe" `
-            "release/SHA256SUMS.txt"
+          $tag = $env:GITHUB_REF_NAME
+          gh release view $tag --json tagName *> $null
+
+          if ($LASTEXITCODE -eq 0) {
+            gh release delete-asset $tag "rabbit.inside.exe" --yes 2> $null
+            gh release upload $tag `
+              "release/rabbit-inside.exe" `
+              "release/SHA256SUMS.txt" `
+              --clobber
+          }
+          else {
+            gh release create $tag `
+              --generate-notes `
+              "release/rabbit-inside.exe" `
+              "release/SHA256SUMS.txt"
+          }
