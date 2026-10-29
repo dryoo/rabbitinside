@@ -1,0 +1,14 @@
+bin/
+obj/
+.nuget/
+.dotnet-home/
+.appdata/
+publish/
+.build-check/
+.build-final/
+.gallery-smoke/
+.browser-smoke/
+.thumbnail-smoke/
+.codex/
+*.user
+*.suo

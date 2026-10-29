@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- BOM 없는 소스 파일도 UTF-8로 읽도록 고정합니다(한글 문자열/주석 보호). -->
+    <CodePage>65001</CodePage>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Rabbit</RootNamespace>
+    <AssemblyName>rabbit inside</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <Version>0.1.0</Version>
+    <Product>rabbit inside</Product>
+    <AssemblyTitle>rabbit inside</AssemblyTitle>
+    <Description>바로가기와 여러 DC 갤러리를 한곳에서 보는 개인용 허브</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+  </ItemGroup>
+
+  <Target Name="KeepSingleFilePublishOutput" AfterTargets="ComputeFilesToPublish">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+                             Condition="'%(Extension)' == '.xml' Or '%(Extension)' == '.pdb'" />
+    </ItemGroup>
+  </Target>
+
+</Project>

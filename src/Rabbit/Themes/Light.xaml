@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 라이트 모드 색입니다. Dark.xaml과 키 이름을 똑같이 맞춰 두고 통째로 바꿉니다. -->
+    <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="WindowForeground" Color="#FF1F1F1F" />
+
+    <SolidColorBrush x:Key="TileHover" Color="#14000000" />
+    <SolidColorBrush x:Key="TileSelected" Color="#26007ACC" />
+    <SolidColorBrush x:Key="TileSelectedBorder" Color="#55007ACC" />
+
+    <SolidColorBrush x:Key="Separator" Color="#22000000" />
+
+    <SolidColorBrush x:Key="ControlBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ControlBorder" Color="#33000000" />
+
+    <SolidColorBrush x:Key="PopupBackground" Color="#FFF7F7F7" />
+    <SolidColorBrush x:Key="PopupBorder" Color="#33000000" />
+    <SolidColorBrush x:Key="MenuHighlight" Color="#22007ACC" />
+    <SolidColorBrush x:Key="ScrollTrack" Color="#FFF2F2F2" />
+    <SolidColorBrush x:Key="ScrollThumb" Color="#55000000" />
+    <SolidColorBrush x:Key="ScrollThumbHover" Color="#88000000" />
+
+    <!-- 메뉴 항목 왼쪽 아이콘 자리(GlyphPanel)가 시스템 강조색을 쓰므로 테마에 맞게 맞춥니다. -->
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#26007ACC" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#FF1F1F1F" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="#FFF7F7F7" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="#FF1F1F1F" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="#FF1F1F1F" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="#FF1F1F1F" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.ScrollBarBrushKey}" Color="#FFF2F2F2" />
+</ResourceDictionary>

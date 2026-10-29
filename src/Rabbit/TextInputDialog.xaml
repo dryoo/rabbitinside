@@ -1,0 +1,26 @@
+<Window x:Class="Rabbit.TextInputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="rabbit inside" Width="380" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False"
+        Background="{DynamicResource WindowBackground}"
+        Foreground="{DynamicResource WindowForeground}">
+    <StackPanel Margin="16">
+        <TextBlock x:Name="PromptText" TextWrapping="Wrap" Margin="0,0,0,8" />
+        <TextBox x:Name="ValueBox" Padding="4"
+                 Background="{DynamicResource ControlBackground}"
+                 Foreground="{DynamicResource WindowForeground}"
+                 BorderBrush="{DynamicResource ControlBorder}"
+                 CaretBrush="{DynamicResource WindowForeground}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="확인" Width="84" IsDefault="True" Click="Ok_Click"
+                    Foreground="{DynamicResource WindowForeground}"
+                    Background="{DynamicResource ControlBackground}"
+                    BorderBrush="{DynamicResource ControlBorder}" />
+            <Button Content="취소" Width="84" Margin="8,0,0,0" IsCancel="True"
+                    Foreground="{DynamicResource WindowForeground}"
+                    Background="{DynamicResource ControlBackground}"
+                    BorderBrush="{DynamicResource ControlBorder}" />
+        </StackPanel>
+    </StackPanel>
+</Window>

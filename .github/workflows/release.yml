@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore src/Rabbit/Rabbit.csproj
+
+      - name: Set release version
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart("v")
+          "RELEASE_VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Publish
+        shell: pwsh
+        run: |
+          dotnet publish src/Rabbit/Rabbit.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained true `
+            -o release `
+            -p:Version=$env:RELEASE_VERSION `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=true `
+            -p:DebugType=None `
+            -p:DebugSymbols=false
+
+      - name: Create checksum
+        shell: pwsh
+        run: |
+          $exe = Join-Path $PWD "release\rabbit inside.exe"
+          $hash = (Get-FileHash -Algorithm SHA256 $exe).Hash.ToLowerInvariant()
+          "$hash  rabbit inside.exe" | Set-Content "release\SHA256SUMS.txt" -Encoding ascii
+
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME `
+            --generate-notes `
+            "release/rabbit inside.exe" `
+            "release/SHA256SUMS.txt"
